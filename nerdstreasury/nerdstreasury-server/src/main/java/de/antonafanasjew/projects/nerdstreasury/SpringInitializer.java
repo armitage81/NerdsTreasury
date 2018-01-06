@@ -1,6 +1,7 @@
 package de.antonafanasjew.projects.nerdstreasury;
 
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.context.support.GenericGroovyApplicationContext;
 
 import de.antonafanasjew.projects.nerdstreasury.serverapi.services.TestService;
 
@@ -11,6 +12,15 @@ public class SpringInitializer {
 		try (ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("beans.xml")) {
 			TestService testService = context.getBean(TestService.class);
 			testService.chooseTestEntity();	
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+		
+		try (GenericGroovyApplicationContext context = new GenericGroovyApplicationContext("beans.groovy")) {
+			TestService testService = context.getBean(TestService.class);
+			testService.chooseTestEntity();	
+		} catch (Exception e) {
+			throw new RuntimeException(e);
 		}
 	}
 	
