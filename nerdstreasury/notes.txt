@@ -1,0 +1,79 @@
+Spring course notes
+------------------------------------
+
+000.overview
+
+	Spring definition:
+		Integrates enterprise modules
+		There is Spring framework and various projects built on top of it
+		Spring framework contains various modules, like Dependency Injection, Transactional data and persistence, Web MVC, WebFlux
+		Spring modules are ready for Java 9 Jigsaw
+	History:
+		Built in 2003
+		Complements Java EE by implementing some of its JSR but ignores others
+		Spring enterprise apps required a web container, later Spring boot allowed to embed the container into the app while WebFlux allows the app to run on a non web container servers
+	Design philosophy
+		Allows late architectural decisions
+		Flexibility regarding the architectures
+		Backward compatibility
+		Clear API design
+		High quality code
+		
+
+001.core
+	
+	IoC Container
+	
+		IoC
+			IoC - Objects don't construct other objects (dependencies) but define dependencies that are injected by the container as properties (dependency injection).
+			Main types: BeanFactory, ApplicationContext. Latter is a bean factory with extended capabilities, like AOP
+			
+		Container
+			Container is represented by the org.springframework.context.ApplicationContext interface. It is configured by the means of configuration metadata (can be XML, annotations, Java code or other means).
+			It describes objects of the application and their dependencies
+			It has various implementations, e.g.
+				ClassPathXmlApplicationContext
+				FileSystemXmlApplicationContext
+			Structuring multiple xml docs to config spring
+				pass them all to the application context constructor or
+				nest them with <import/>
+			groovy is a good alternative to xml and java bean definitions
+			GenericApplicationContext and XmlBeanDefinitionReader/GroovyBeanDefinitionReader can be used to mix both types of config data (groovy and xml)
+			
+		Beans
+		Dependencies
+		Bean scopes
+		Customizing the nature of a bean
+		Bean definition inheritance
+		Container extension points
+		Annotation-based container configuration
+		Class path scanning and managed components
+		JSR330 standard annotations
+		Java-based container configuration
+		Environment abstractions
+		Registering a load time weaver
+		Additional capabilities of the ApplicationContext
+		Bean factory
+		
+	Resources
+	Validation, Data Binding and Type Conversion
+	Spring Expression Language
+	AOP
+	Spring AOP APIs
+	Null Safety
+	Data Buffers and Codecs
+	
+	
+002.testing
+003.data-access
+004.web
+005.web-reactive
+006.integration
+007.languages
+100.spring-boot-reference
+200.spring-security-reference
+300.spring-shell-reference
+400.spring-webflow-reference
+500.spring-data-jpa-reference
+600.spring-data-rest-reference
+700.spring-batch-reference
