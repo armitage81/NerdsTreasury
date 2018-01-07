@@ -77,6 +77,28 @@ Spring course notes
 					see replaced-method
 					
 		Bean scopes
+			general scopes
+				singleton <- One instance per container (not per class loader like normal singleton)
+				prototype <- One instance per call or reference (usually stateful objects)
+				Spring does not manage prototype beans after initialization, e.g. destruction call backs are not called.
+			web scopes (need to be registered via DispatcherServlet or servlet filter or <listener-class>org.springframework.web.context.request.RequestContextListener</listener-class>)
+				request <- @RequestScope
+				session <- @SessionScope
+				application <- @ApplicationScope - one per web app. This scope is bound to ServletContext as an attribute
+				websocket
+			<aop:scoped-proxy/> can be used to expose short living beans as dependencies for the singleton beans
+				If prototype interface is A and implementation is AA, then this element injects a dependency of type A (AProxy) into the singleton object B which is unaware of the proxy (and not AA as it would be without this tag)
+				When singleton calls methods on its dependency (b.a.m()), AProxy::m() retrieves the current instance of AA and calls AA::m()
+					the type of the proxy is defined by proxy-target-class="false|true". True is default and means CGLIB-based proxy, false means standard JDK proxies
+			custom scopes
+				Implement: org.springframework.beans.factory.config.Scope
+					Object get(String name, ObjectFactory objectFactory)
+					Object remove(String name)
+					void registerDestructionCallback(String name, Runnable destructionCallback)
+					String getConversationId()
+				Register it on the ApplicationContext
+					void registerScope(String scopeName, Scope scope);
+				Alternatively, register the scope in the XML via the bean of type org.springframework.beans.factory.config.CustomScopeConfigurer  
 		Customizing the nature of a bean
 		Bean definition inheritance
 		Container extension points
