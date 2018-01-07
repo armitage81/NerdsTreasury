@@ -5,7 +5,7 @@ import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
 @RunWith(Suite.class)
-@SuiteClasses({ TestSpringInitializer.class })
+@SuiteClasses({ TestDependencyInjection.class, TestAutowiring.class, TestMethodInjection.class})
 public class AllTests {
 
 }

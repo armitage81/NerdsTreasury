@@ -41,13 +41,41 @@ Spring course notes
 			GenericApplicationContext and XmlBeanDefinitionReader/GroovyBeanDefinitionReader can be used to mix both types of config data (groovy and xml)
 			
 		Beans
-		    aliases
+			Aliases
 		    
 		Dependencies
-		    constructor injection allows specialization of arguments via types, indexes and names
-		    names work only if debug flag is enabled or @ConstructorProperties annotation is present
-		    @Required annotation on a setter method checks for initialization of the property
-		    Singleton beans are lazy loaded by default
+			Constructor injection allows specialization of arguments via types, indexes and names
+			Names work only if debug flag is enabled or @ConstructorProperties annotation is present
+			p - schema can be used to define a bean with its properties without using <property> tags.
+				A bean with properties age and service can be set with p:age="36" p:service-ref="myService"
+			c - schema can be used to initialize a bean with constructor arguments without using xml tags
+				Similar to the p schema
+			@Required annotation on a setter method checks for initialization of the property
+			Singleton beans are eagerly loaded by default
+			Bean of type org.springframework.beans.factory.config.PropertyPlaceholderConfigurer allows access to properties via ${var}
+			idref checks at the property setting time that the bean with the given id exists
+			collections can be defined as 'literals'
+			in parent child relations of beans, collection properties can be merged (see merge attribute)
+			null can be set with <null/>
+			Setting nested properties is possible with <property name="fred.bob.sammy" value="123" />
+			depends-on can be used to initialize one bean before the other. 
+				Usually, it automatically happens because of the dependency resolving, but sometimes the order has to be defined manually because the other bean is used in a static block of this bean
+				<bean id="beanOne" class="ExampleBean" depends-on="manager"/>
+				<bean id="manager" class="ManagerBean" />
+				lazy-init attribute is by default false except if default-lazy-init is set as beans attribute
+				autowiring 
+					can be set on bean level (autowire attribute)
+					4 types: no, byName, byType, constructor
+					explicit properties override autowiring
+					primary attribute nominates a bean as autowiring candidate
+					autowire-candidate=false excludes a bean from being autowired
+					beans[default-autowire-candidates] expects a pattern to define which beans will be autowired
+				method injection can be used to inject prototype scoped beans into a method of a singleton bean at runtime
+					see lookup-method
+					@Lookup
+				methods of beans can be overridden with the same logic
+					see replaced-method
+					
 		Bean scopes
 		Customizing the nature of a bean
 		Bean definition inheritance
