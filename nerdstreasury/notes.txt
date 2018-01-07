@@ -41,7 +41,13 @@ Spring course notes
 			GenericApplicationContext and XmlBeanDefinitionReader/GroovyBeanDefinitionReader can be used to mix both types of config data (groovy and xml)
 			
 		Beans
+		    aliases
+		    
 		Dependencies
+		    constructor injection allows specialization of arguments via types, indexes and names
+		    names work only if debug flag is enabled or @ConstructorProperties annotation is present
+		    @Required annotation on a setter method checks for initialization of the property
+		    Singleton beans are lazy loaded by default
 		Bean scopes
 		Customizing the nature of a bean
 		Bean definition inheritance
