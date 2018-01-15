@@ -102,7 +102,13 @@ Spring course notes
 		Customizing the nature of a bean
 		Bean definition inheritance
 		Container extension points
+			BeanPostProcessor
+			BeanFactoryPostProcessor: e.g. PlaceholderConfigurerSupport for replacing placeholders with properties or PropertyOverrideConfigurer to define primitive bean property values with properties
+			FactoryBean
+				A special interface. If a class implements it, the bean definition of this class won't return an instance of this class but rather the object that is returned by FactoryBean::getObject()
+				To return the factory bean itself (bean name = myFactory) use the reference &myFactory
 		Annotation-based container configuration
+			XML takes precedence over annotations
 		Class path scanning and managed components
 		JSR330 standard annotations
 		Java-based container configuration
